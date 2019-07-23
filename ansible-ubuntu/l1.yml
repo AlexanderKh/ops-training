@@ -1,0 +1,7 @@
+---
+- name: Create user, install postgres
+  hosts: all
+
+  roles:
+    - system
+    - postgres

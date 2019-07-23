@@ -1,0 +1,13 @@
+---
+
+- name: Create user
+  user:
+    name: "{{system_user_name}}"
+  become: yes
+
+- name: Create directory for user data
+  file:
+    path: "/home/{{system_user_name}}/data"
+    state: directory
+  become: yes
+  become_user: "{{system_user_name}}"
