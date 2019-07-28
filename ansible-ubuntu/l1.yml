@@ -4,5 +4,7 @@
 
   roles:
     - system
+    - python
     - postgres
     - docker
+    - blog

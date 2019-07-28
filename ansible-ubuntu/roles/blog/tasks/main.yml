@@ -1,0 +1,31 @@
+---
+
+  - name: Remove blog container
+    docker_container:
+      name: blog
+      state: absent
+    become: yes
+
+  - name: Reset image with "latest" tag
+    docker_image:
+      state: absent
+      name: alexanderkhomchenkomev/blog
+      tag: latest
+    become: yes
+
+  - name: Run blog
+    docker_container:
+      name: blog
+      image: alexanderkhomchenkomev/blog:latest
+      exposed_ports:
+        3000:3000
+      published_ports:
+        0.0.0.0:3000:3000
+      state: started
+      restart: yes
+    become: yes
+
+  - name: Run migrations for blog
+    shell:
+      docker exec -it blog rake db:migrate
+    become: yes

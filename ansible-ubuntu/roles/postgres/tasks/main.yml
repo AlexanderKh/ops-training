@@ -5,12 +5,6 @@
     state: present
   become: yes
 
-- name: Install python client for postgres
-  apt:
-    name: python-psycopg2
-    state: present
-  become: yes
-
 - name: Create Postgresql database
   postgresql_db:
     name: "{{db_name}}"

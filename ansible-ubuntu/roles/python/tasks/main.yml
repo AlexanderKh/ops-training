@@ -1,0 +1,6 @@
+---
+- name: Install python dependencies
+  apt:
+    name: python-pip,python-pkg-resources,python-setuptools,python-virtualenv
+    state: present
+  become: yes
