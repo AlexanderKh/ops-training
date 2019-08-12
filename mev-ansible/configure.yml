@@ -1,0 +1,10 @@
+---
+- name: Configure ubuntu 18.04 server to meet app requirements
+  hosts: all
+
+  roles:
+    - configure-vm
+    - configure-python
+    - configure-docker
+    - configure-user
+    - configure-nginx

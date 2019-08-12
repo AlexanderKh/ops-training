@@ -1,0 +1,25 @@
+---
+
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+
+- name: Add Docker APT repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+  become: yes
+
+- name: Install required system packages
+  apt:
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'docker-ce']
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Install Docker module for Python
+  pip:
+    name: docker
+  become: yes

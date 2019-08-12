@@ -1,0 +1,46 @@
+---
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: latest
+  become: yes
+
+- name: Start nginx service
+  service:
+    name: nginx
+    state: started
+  become: yes
+
+- name: Unlink default config
+  file:
+    name: /etc/nginx/sites-enabled/default
+    state: absent
+  become: yes
+  notify:
+    - restart nginx
+
+- name: Remove default config
+  file:
+    name: /etc/nginx/sites-available/default
+    state: absent
+  become: yes
+  notify:
+    - restart nginx
+
+- name: Copy mev.com config
+  copy:
+    src: mev.com
+    dest: /etc/nginx/sites-available/mev.com
+  become: yes
+  notify:
+    - restart nginx
+
+- name: Link mev.com config
+  file:
+    src: /etc/nginx/sites-available/mev.com
+    dest: /etc/nginx/sites-enabled/mev.com
+    state: link
+  become: yes
+  notify:
+    - restart nginx

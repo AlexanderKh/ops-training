@@ -1,0 +1,7 @@
+---
+- name: Install python dependencies
+  apt:
+    name: ['python3-pip', 'python3-pkg-resources', 'python3-setuptools']
+    state: present
+    update_cache: yes
+  become: yes

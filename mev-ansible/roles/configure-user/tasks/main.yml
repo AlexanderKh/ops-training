@@ -1,0 +1,7 @@
+---
+
+- name: create user
+  user:
+    name: "{{deploy_user}}"
+    groups: docker
+  become: yes
